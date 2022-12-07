@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from 'src/auth/entities/user.entity';
 import { CartService } from 'src/cart/cart.service';
@@ -18,8 +18,7 @@ export class OrdersService {
   async create(user: User) {
     try {
         //ordenes pendientes?
-      const usersOrder = await this.orderRepo.find({ relations: ['user'] ,
-      where: {isPending: true}});
+        const usersOrder = await this.orderRepo.find({ relations: ['user'], where: {isPending: true}});
         //si no existe, hago una nueva orden, sumando los totales.
         if(usersOrder.length === 0 || usersOrder === null){
           //items del carro del usuario
@@ -30,17 +29,17 @@ export class OrdersService {
               const total: number = cartItems.map(item => item.subtotal).reduce((acc, next) => acc + next);
               //mapeo los items del cart, y los pongo en un array de Product[] para asignarlos debajo
               const products: Product[] = cartItems.map(item => item.item);
-
-              let newOrder = this.orderRepo.create({total: total, isPending: true, items: products, user: user});
+              //const newOrderDTO: CreateOrderDto = ({total: total, isPending: true, items: products, user: user});
+              let newOrder = this.orderRepo.create({total: total});
               //newOrder.items = products; // <----- aqui
-              //newOrder.user = user;
-              console.log(newOrder);
+              newOrder.user = user;
               return this.orderRepo.save(newOrder);
+          }
+          else
+            return new NotFoundException('The user has no products in cart');
         }
-      }
-      return null;
+        else return new NotFoundException('The user has no products in cart'); 
     } catch (error) {
-      
     }
   }
 

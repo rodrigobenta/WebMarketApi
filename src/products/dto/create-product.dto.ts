@@ -1,4 +1,5 @@
 import { IsNumber, IsOptional, IsString, MaxLength, MinLength } from "class-validator";
+import { Category } from "src/category/entities/category.entity";
 
 export class CreateProductDto {
 
@@ -16,5 +17,8 @@ export class CreateProductDto {
     @IsNumber()
     @IsOptional()
     quantity: number;
+
+    @IsNumber()
+    category: number;
 
 }

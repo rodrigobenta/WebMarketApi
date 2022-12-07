@@ -1,3 +1,4 @@
+import { IsOptional } from "class-validator";
 import { User } from "src/auth/entities/user.entity";
 import { Product } from "src/products/entities/product.entity";
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
@@ -10,6 +11,7 @@ export class Order {
     id_order: number;
 
     @OneToMany(() => Product, item => item.id_product)
+    @IsOptional()
     items: Product[];
 
     @OneToOne(() => User, user => user.id_user,{
@@ -17,7 +19,7 @@ export class Order {
         onUpdate: "CASCADE",
         cascade: true,
     })
-    @JoinColumn({name: 'id_user'})
+    @JoinColumn()
     user: User;
 
     @Column('float',{

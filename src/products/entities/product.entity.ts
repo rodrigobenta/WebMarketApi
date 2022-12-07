@@ -1,5 +1,6 @@
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Cart } from "src/cart/entities/cart.entity";
+import { Category } from "src/category/entities/category.entity";
 
 @Entity()
 export class Product {
@@ -28,6 +29,14 @@ export class Product {
         default: true
     })
     isActive: boolean;
+
+    @OneToOne(() => Category, category => category.id_category,{
+        onDelete: "CASCADE",
+        onUpdate: "CASCADE",
+        cascade: true,
+    })
+    @JoinColumn()
+    category: Category
 
     @OneToMany(() => Cart, cart => cart.item)
     cartProduct: Cart[];
