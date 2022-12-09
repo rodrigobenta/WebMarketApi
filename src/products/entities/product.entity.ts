@@ -1,5 +1,5 @@
 import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Cart } from "src/cart/entities/cart.entity";
+import { Cart } from "../../cart/entities/cart.entity";
 import { Category } from "src/category/entities/category.entity";
 
 @Entity()

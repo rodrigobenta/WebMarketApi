@@ -1,6 +1,6 @@
 import { BeforeInsert, Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Cart } from "src/cart/entities/cart.entity";
-import { Order } from "src/orders/entities/order.entity";
+import { Cart } from "../../cart/entities/cart.entity";
+import { Order } from "../../orders/entities/order.entity";
 
 
 @Entity('users')

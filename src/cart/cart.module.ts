@@ -6,7 +6,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AuthModule } from 'src/auth/auth.module';
 import { ProductsService } from 'src/products/products.service';
 import { Product } from 'src/products/entities/product.entity';
-import { User } from 'src/auth/entities/user.entity';
+import { User } from '../auth/entities/user.entity';
 import { ProductsModule } from 'src/products/products.module';
 
 @Module({

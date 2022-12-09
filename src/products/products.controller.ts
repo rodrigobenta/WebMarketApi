@@ -4,7 +4,6 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { Auth, GetUser } from '../auth/decorators/index';
 import { ValidRoles } from 'src/auth/interfaces/valid-roles';
-import { User } from 'src/auth/entities/user.entity';
 
 @Controller('products')
 export class ProductsController {

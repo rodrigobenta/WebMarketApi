@@ -3,7 +3,7 @@ import { OrdersService } from './orders.service';
 import { CreateOrderDto } from './dto/create-order.dto';
 import { UpdateOrderDto } from './dto/update-order.dto';
 import { Auth, GetUser } from 'src/auth/decorators';
-import { User } from 'src/auth/entities/user.entity';
+import { User } from '../auth/entities/user.entity';
 
 @Controller('orders')
 export class OrdersController {
@@ -25,9 +25,10 @@ export class OrdersController {
     return this.ordersService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateOrderDto: UpdateOrderDto) {
-    return this.ordersService.update(+id, updateOrderDto);
+  @Patch('confirm/:id')
+  @Auth()
+  confirmOrder(@Param('id') id: string, @GetUser() user: User) {
+    return this.ordersService.confirmOrder(+id, user);
   }
 
   @Delete(':id')

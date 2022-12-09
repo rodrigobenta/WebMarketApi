@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { Auth, GetUser } from 'src/auth/decorators';
-import { User } from 'src/auth/entities/user.entity';
+import { User } from '../auth/entities/user.entity';
 import { ValidRoles } from 'src/auth/interfaces/valid-roles';
 import { CartService } from './cart.service';
 import { CreateCartDto } from './dto/create-cart.dto';
